@@ -10,7 +10,7 @@
 | first_name         | string | null: false               |
 | last_name          | string | null: false               |
 | kana_first_name    | string | null: false               |
-| kana-last_name     | string | null: false               |
+| kana_last_name     | string | null: false               |
 | birthday           | date   | null: false               |
 
 
@@ -37,7 +37,7 @@ has_many : buys
 
 ### Association
 belongs_to : user
-belongs_to : item
+has_one    : buy
 
 
 
