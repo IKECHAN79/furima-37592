@@ -116,3 +116,4 @@ RSpec.describe User, type: :model do
     end
   end
 end
+<% @items.each do |item| %>
