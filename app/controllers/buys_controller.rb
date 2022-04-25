@@ -1,7 +1,11 @@
 class BuysController < ApplicationController
+  before_action :authenticate_user!
   def index
     @item = Item.find(params[:item_id])
     @buy_address = BuyAddress.new
+    #if @item.user_id != current_user.id || @item.buy != nil
+     #  redirect_to root_path
+    #end
   end
 
   def create
@@ -14,6 +18,8 @@ class BuysController < ApplicationController
       render :index
     end
   end
+
+  
 
   private
 
