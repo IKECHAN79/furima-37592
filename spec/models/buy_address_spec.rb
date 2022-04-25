@@ -58,6 +58,12 @@ context '商品購入ができない場合' do
     @buy_address.valid?
     expect(@buy_address.errors.full_messages).to include("Phone number is invalid")
   end
+
+  it "tokenが空では購入できないこと" do
+    @buy_address.token = nil
+    @buy_address.valid?
+    expect(@buy_address.errors.full_messages).to include("Token can't be blank")
+  end
  end
 end
 end

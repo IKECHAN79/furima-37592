@@ -72,4 +72,3 @@ has_one    : addresses
 belongs_to : buy
 
 
-id: 'charge-form'
