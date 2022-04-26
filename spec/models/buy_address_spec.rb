@@ -13,6 +13,11 @@ context '商品購入ができる場合' do
   it 'building_name以外すべての項目が存在していれば購入できる' do
     expect(@buy_address).to be_valid
   end
+
+  it 'building_nameが空でも購入できる' do
+    @buy_address.building_name = ''
+    expect(@buy_address).to be_valid
+  end
 end
 
 context '商品購入ができない場合' do
@@ -59,11 +64,35 @@ context '商品購入ができない場合' do
     expect(@buy_address.errors.full_messages).to include("Phone number is invalid")
   end
 
-  it "tokenが空では購入できないこと" do
+  it "tokenが空では購入できない" do
     @buy_address.token = nil
     @buy_address.valid?
     expect(@buy_address.errors.full_messages).to include("Token can't be blank")
   end
+  it "電話番号が12桁以上では購入できない" do
+    @buy_address.phone_number = '090123456789'
+    @buy_address.valid?
+    expect(@buy_address.errors.full_messages).to include("Phone number is invalid")
+  end
+
+  it "電話番号に半角数字以外が含まれている場合は購入できない" do
+    @buy_address.phone_number = 'aaああ１１'
+    @buy_address.valid?
+    expect(@buy_address.errors.full_messages).to include("Phone number is invalid")
+  end
+
+  it "userが紐付いていなければ購入できない" do
+    @buy_address.user_id = nil
+    @buy_address.valid?
+    expect(@buy_address.errors.full_messages).to include("User can't be blank")
+  end
+
+  it "itemが紐付いていなければ購入できない" do
+    @buy_address.item_id = nil
+    @buy_address.valid?
+    expect(@buy_address.errors.full_messages).to include("Item can't be blank")
+  end
+
  end
 end
 end
