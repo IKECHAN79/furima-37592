@@ -70,3 +70,5 @@ has_one    : addresses
 
 ### Association
 belongs_to : buy
+
+
